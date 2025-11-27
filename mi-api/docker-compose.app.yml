@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  mi-api:
+    build: ./mi-api
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+  mi-web:
+    build: ./mi-web
+    ports:
+      - "8080:8080"
+    environment:
+      - API_URL=http://mi-api:3000
+    depends_on:
+      - mi-api
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

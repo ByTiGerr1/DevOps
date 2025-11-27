@@ -1,0 +1,20 @@
+# Usamos una imagen ligera de Node
+FROM node:18-alpine
+
+# Directorio de trabajo
+WORKDIR /app
+
+# Copiamos dependencias
+COPY package*.json ./
+
+# Instalamos
+RUN npm install
+
+# Copiamos código fuente
+COPY . .
+
+# Exponemos el puerto (Asumo 8080 o similar para el front, ajusta según tu index.js)
+EXPOSE 8080
+
+# Comando de inicio
+CMD ["node", "index.js"]

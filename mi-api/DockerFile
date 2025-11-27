@@ -1,0 +1,20 @@
+# Usamos una imagen ligera de Node
+FROM node:18-alpine
+
+# Directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copiamos primero los archivos de dependencias para aprovechar el caché de capas de Docker
+COPY package*.json ./
+
+# Instalamos dependencias
+RUN npm install
+
+# Copiamos el resto del código
+COPY . .
+
+# Exponemos el puerto (Asumo 3000 por defecto en Express, ajusta si usas otro)
+EXPOSE 3000
+
+# Comando de inicio
+CMD ["node", "index.js"]
